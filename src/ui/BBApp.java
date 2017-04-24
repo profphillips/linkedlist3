@@ -1,9 +1,6 @@
 package ui;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,15 +14,15 @@ import utility.Validator;
  */
 public class BBApp {
 
-    LinkedList<Friend> list;
+    List<Friend> list;
 
     public BBApp() {
         this.list = new LinkedList();
-        list.push(new Friend("Barb", 9));
-        list.push(new Friend("Steve", 5));
-        list.push(new Friend("Tom", 7));
-        list.push(new Friend("Sue", 3));
-        list.push(new Friend("Mark", 9));
+        list.add(new Friend("Barb", 9));
+        list.add(new Friend("Steve", 5));
+        list.add(new Friend("Tom", 7));
+        list.add(new Friend("Sue", 3));
+        list.add(new Friend("Mark", 9));
         start();
     }
 
@@ -41,38 +38,28 @@ public class BBApp {
             } else if (choice.equals("add")) {
                 String name = Validator.getLine(sc, "Enter friend's name: ");
                 int rating = Validator.getInt(sc, "Enter rating: ");
-                list.push(new Friend(name, rating));
+                list.add(new Friend(name, rating));
             } else if (choice.equals("remove")) {
                 int index = Validator.getInt(sc, "Enter index to remove: ");
                 list.remove(index);
             } else if (choice.equals("list")) {
                 System.out.println(list);
             } else if (choice.equals("name")) {
-//                Friend[] fa = (Friend[])list.toArray();
-//                Arrays.sort(fa, (a, b) -> a.getName().compareTo(b.getName()));
                 Collections.sort(list, (a, b) -> a.getName().compareTo(b.getName()));
-                //Arrays.sort(list, (a, b) -> a.getName().compareTo(b.getName()));
-//                for (Friend f : fa) {
-                System.out.println(list.toString());
-//                }
-            } else if (choice.equals("reverse")) {
-                Collections.sort(list, (a, b) -> b.getName().compareTo(a.getName()));
-                System.out.println(list.toString());
-//                Friend[] fa = (Friend[])list.toArray();
-//                Arrays.sort(fa, (a, b) -> b.getName().compareTo(a.getName()));
+//                // If we don't want to change the list then use a temporary array:
+//                Friend[] fa = list.toArray(new Friend[0]);
+//                Arrays.sort(fa, (a, b) -> a.getName().compareTo(b.getName()));
 //                for (Friend f : fa) {
 //                    System.out.println(f.toString());
 //                }
+            } else if (choice.equals("reverse")) {
+                Collections.sort(list, (a, b) -> b.getName().compareTo(a.getName()));
             } else if (choice.equals("rating")) {
-//                Collections.sort(list);
-//                System.out.println(list.toString());
-                Friend[] fa = list.toArray(new Friend[0]);
-                Arrays.sort(fa, (a, b) -> Integer.compare(a.getRating(), b.getRating()));
-                for (Friend f : fa) {
-                    System.out.println(f.toString());
-                }
-            } else {
-
+                Collections.sort(list);
+            } else if (choice.equals("search")) {
+                ;
+            } else if (choice.equals("range")) {
+                ;
             }
         }
     }
