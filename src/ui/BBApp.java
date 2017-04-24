@@ -1,19 +1,23 @@
 package ui;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
-import linkedlist2.Friend;
-import linkedlist2.LinkedList;
+import model.Friend;
 import utility.Validator;
 
 /**
- * A black book rating app.
+ * A black book rating app. Now using Java API data structures.
  *
  * @author 55jphillip
  */
 public class BBApp {
 
-    LinkedList list;
+    LinkedList<Friend> list;
 
     public BBApp() {
         this.list = new LinkedList();
@@ -25,7 +29,7 @@ public class BBApp {
         start();
     }
 
-    public void start() {
+    private void start() {
         Scanner sc = new Scanner(System.in);
         String choice;
         while (true) {
@@ -40,23 +44,29 @@ public class BBApp {
                 list.push(new Friend(name, rating));
             } else if (choice.equals("remove")) {
                 int index = Validator.getInt(sc, "Enter index to remove: ");
-                list.delete(index);
+                list.remove(index);
             } else if (choice.equals("list")) {
                 System.out.println(list);
             } else if (choice.equals("name")) {
-                Friend[] fa = list.toArray();
-                Arrays.sort(fa, (a, b) -> a.getName().compareTo(b.getName()));
-                for (Friend f : fa) {
-                    System.out.println(f.toString());
-                }
+//                Friend[] fa = (Friend[])list.toArray();
+//                Arrays.sort(fa, (a, b) -> a.getName().compareTo(b.getName()));
+                Collections.sort(list, (a, b) -> a.getName().compareTo(b.getName()));
+                //Arrays.sort(list, (a, b) -> a.getName().compareTo(b.getName()));
+//                for (Friend f : fa) {
+                System.out.println(list.toString());
+//                }
             } else if (choice.equals("reverse")) {
-                Friend[] fa = list.toArray();
-                Arrays.sort(fa, (a, b) -> b.getName().compareTo(a.getName()));
-                for (Friend f : fa) {
-                    System.out.println(f.toString());
-                }
+                Collections.sort(list, (a, b) -> b.getName().compareTo(a.getName()));
+                System.out.println(list.toString());
+//                Friend[] fa = (Friend[])list.toArray();
+//                Arrays.sort(fa, (a, b) -> b.getName().compareTo(a.getName()));
+//                for (Friend f : fa) {
+//                    System.out.println(f.toString());
+//                }
             } else if (choice.equals("rating")) {
-                Friend[] fa = list.toArray();
+//                Collections.sort(list);
+//                System.out.println(list.toString());
+                Friend[] fa = list.toArray(new Friend[0]);
                 Arrays.sort(fa, (a, b) -> Integer.compare(a.getRating(), b.getRating()));
                 for (Friend f : fa) {
                     System.out.println(f.toString());
